@@ -1,6 +1,6 @@
 pandas>=2.2.2
 numpy>=2.0.0
-pandas-ta-classic
+pandas-ta
 requests
 feedparser
 yfinance==0.2.52
@@ -13,15 +13,3 @@ transformers
 shap
 tqdm
 tensorflow-cpu>=2.20.0
-
-
-
-
-
-
-
-
-
-
-
-
