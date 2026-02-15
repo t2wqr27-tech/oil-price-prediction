@@ -3,7 +3,7 @@ numpy
 pandas-ta
 requests
 feedparser
-curl-cffi>=0.7.4
+curl-cffi==0.13.1
 yfinance>=0.2.54
 openpyxl
 scikit-learn
@@ -14,5 +14,6 @@ transformers
 shap
 tqdm
 tensorflow-cpu
+
 
 
