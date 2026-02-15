@@ -1,10 +1,9 @@
 pandas
 numpy<2.0.0
-https://github.com/twopirllc/pandas-ta/archive/master.zip
+pandas-ta
 requests
 feedparser
-curl-cffi==0.13.1
-yfinance>=0.2.54
+yfinance==0.2.52
 openpyxl
 scikit-learn
 matplotlib
