@@ -1,6 +1,6 @@
 pandas
 numpy<2.0.0
-pandas-ta
+pandas-ta==0.3.14b
 requests
 feedparser
 yfinance==0.2.52
@@ -13,6 +13,7 @@ transformers
 shap
 tqdm
 tensorflow-cpu
+
 
 
 
