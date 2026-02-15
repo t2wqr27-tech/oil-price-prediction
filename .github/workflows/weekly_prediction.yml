@@ -49,4 +49,3 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "🤖 Auto-update: Weekly oil price DB and reports"
-          file_pattern: 'data/* 週五精準預測成果/*'
