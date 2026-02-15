@@ -2,9 +2,8 @@ name: Weekly Oil Price Prediction
 
 on:
   schedule:
-    # 定時執行：UTC 時間每週六 00:00 (等同台灣時間每週六 08:00)
     - cron: '0 0 * * 6'
-  workflow_dispatch: # 允許手動點擊按鈕執行
+  workflow_dispatch:
 
 jobs:
   run-prediction:
@@ -15,6 +14,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
@@ -25,27 +25,22 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
           pip install -r requirements.txt
 
       - name: Run prediction script
         env:
           LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
-          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}  # 👈 新增這一行
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
         run: |
-          # 執行你的主程式
           python 即時預測.py
 
-      - name: Upload Output Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: prediction-reports
-          path: |
-            data/
-            週五精準預測成果/
-          retention-days: 14 # 檔案在雲端保留 14 天
+      - name: Clean up system cache
+        run: |
+          # 刪除 Python 產生的系統暫存檔，保持專案乾淨，避免存檔衝突
+          find . -type d -name "__pycache__" -exec rm -rf {} +
 
       - name: Commit and push updated data
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "🤖 Auto-update: Weekly oil price DB and reports"
+          branch: main
