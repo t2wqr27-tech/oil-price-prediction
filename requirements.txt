@@ -10,7 +10,7 @@ matplotlib
 xgboost
 statsmodels
 transformers
-torch
 shap
 tqdm
-tensorflow
+tensorflow-cpu
+
