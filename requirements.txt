@@ -13,3 +13,4 @@ transformers
 torch
 shap
 tqdm
+tensorflow
