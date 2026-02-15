@@ -31,6 +31,7 @@ jobs:
       - name: Run prediction script
         env:
           LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}  # 👈 新增這一行
         run: |
           # 執行你的主程式
           python 即時預測.py
