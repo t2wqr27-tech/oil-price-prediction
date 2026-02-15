@@ -79,8 +79,8 @@ logging.basicConfig( # 配置 logging 模組，將日誌輸出到檔案和控制
     ]
 )
 
-LINE_CHANNEL_ACCESS_TOKEN = "LINE_CHANNEL_ACCESS_TOKEN" # 請替換為你的 LINE Messaging API 的 Channel Access Token
-LINE_USER_ID = "LINE_USER_ID" # 請替換為你想要接收通知的 LINE User ID (可以是個人或群組的 ID)
+LINE_CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_TOKEN", "") 
+LINE_USER_ID = os.environ.get("LINE_USER_ID", "")
 OUTDIR = "週五精準預測成果" # 設定輸出資料夾名稱
 
 # ======================================================
@@ -758,4 +758,5 @@ def main(): # 定義主函式，作為整個預測系統的入口點，負責協
     logging.info(f"\n✅ 所有分析完成！結果已儲存於：{OUTDIR}")
     
 if __name__ == "__main__":
+
     main()
