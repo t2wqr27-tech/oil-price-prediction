@@ -1,0 +1,50 @@
+name: Weekly Oil Price Prediction
+
+on:
+  schedule:
+    # 定時執行：UTC 時間每週六 00:00 (等同台灣時間每週六 08:00)
+    - cron: '0 0 * * 6'
+  workflow_dispatch: # 允許手動點擊按鈕執行
+
+jobs:
+  run-prediction:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run prediction script
+        env:
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+        run: |
+          # 執行你的主程式
+          python 即時預測.py
+
+      - name: Upload Output Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: prediction-reports
+          path: |
+            data/
+            週五精準預測成果/
+          retention-days: 14 # 檔案在雲端保留 14 天
+
+      - name: Commit and push updated data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 Auto-update: Weekly oil price DB and reports"
+          file_pattern: 'data/* 週五精準預測成果/*'
