@@ -1,0 +1,15 @@
+pandas
+numpy
+pandas-ta
+requests
+feedparser
+yfinance
+openpyxl
+scikit-learn
+matplotlib
+xgboost
+statsmodels
+transformers
+torch
+shap
+tqdm
