@@ -1,5 +1,5 @@
-pandas
-numpy<2.0.0
+pandas==2.1.4
+numpy==1.26.4
 pandas-ta-classic
 requests
 feedparser
@@ -13,6 +13,7 @@ transformers
 shap
 tqdm
 tensorflow-cpu
+
 
 
 
