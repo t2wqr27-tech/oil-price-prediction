@@ -1,6 +1,6 @@
 pandas
 numpy<2.0.0
-https://github.com/twopirllc/pandas-ta/archive/main.zip
+https://github.com/twopirllc/pandas-ta/archive/master.zip
 requests
 feedparser
 curl-cffi==0.13.1
@@ -14,6 +14,7 @@ transformers
 shap
 tqdm
 tensorflow-cpu
+
 
 
 
