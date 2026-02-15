@@ -3,6 +3,7 @@ numpy>=2.0.0
 pandas-ta
 requests
 requests-cache
+requests-ratelimiter
 feedparser
 yfinance==0.2.52
 openpyxl
@@ -14,4 +15,3 @@ transformers
 shap
 tqdm
 tensorflow-cpu>=2.20.0
-
