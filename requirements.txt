@@ -1,5 +1,5 @@
-pandas==2.1.4
-numpy==1.26.4
+pandas>=2.2.2
+numpy>=2.0.0
 pandas-ta-classic
 requests
 feedparser
@@ -12,7 +12,8 @@ statsmodels
 transformers
 shap
 tqdm
-tensorflow-cpu
+tensorflow-cpu>=2.20.0
+
 
 
 
