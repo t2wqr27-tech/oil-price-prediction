@@ -193,3 +193,28 @@ Traceback (most recent call last):
     if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: ❌ 數據集建立失敗
+2026-02-15 20:20:21,546 - INFO - ✅ 運行模式：即時預測
+2026-02-15 20:20:23,516 - ERROR - 
+1 Failed download:
+2026-02-15 20:20:23,517 - ERROR - ['BZ=F']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-15 20:20:24,855 - ERROR - 
+1 Failed download:
+2026-02-15 20:20:24,855 - ERROR - ['USDTWD=X']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-15 20:20:26,193 - ERROR - 
+1 Failed download:
+2026-02-15 20:20:26,193 - ERROR - ['JPY=X']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-15 20:20:27,532 - ERROR - 
+1 Failed download:
+2026-02-15 20:20:27,532 - ERROR - ['KRW=X']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-15 20:20:28,840 - ERROR - 
+1 Failed download:
+2026-02-15 20:20:28,840 - ERROR - ['^VIX']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-15 20:20:28,842 - ERROR - ❌ 特徵建立失敗，程式終止: ❌ 數據集建立失敗
+Traceback (most recent call last):
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/即時預測.py", line 201, in main
+    build_and_save_features(mode=mode) # 呼叫 build_and_save_features 函式來建立特徵資料，根據 mode 來決定使用哪種模式的特徵資料，這個函式會從爬蟲模組中獲取最新的數據，進行特徵工程處理，並將結果保存為 parquet 檔案，確保後續的分析和預測使用到最新的特徵資料
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/爬蟲整合.py", line 530, in build_and_save_features
+    if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ❌ 數據集建立失敗
