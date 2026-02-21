@@ -1,6 +1,5 @@
 pandas>=2.2.2
 numpy<2.0.0
-https://github.com/twopirllc/pandas-ta/archive/refs/heads/development.zip
 requests
 requests-cache
 requests-ratelimiter
