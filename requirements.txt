@@ -1,6 +1,6 @@
 pandas>=2.2.2
 numpy<2.0.0
-pandas-ta
+pandas-ta==0.3.14b0
 requests
 requests-cache
 requests-ratelimiter
@@ -16,3 +16,4 @@ transformers
 shap
 tqdm
 tensorflow-cpu>=2.20.0
+
