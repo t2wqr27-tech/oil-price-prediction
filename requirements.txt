@@ -1,6 +1,6 @@
 pandas>=2.2.2
 numpy<2.0.0
-https://github.com/twopirllc/pandas-ta/archive/refs/heads/main.zip  # 👉 關鍵修改：不透過 git，直接下載打包好的原始碼
+https://github.com/twopirllc/pandas-ta/archive/master.zip  # 👉 關鍵修改：將 main 改成 master
 requests
 requests-cache
 requests-ratelimiter
