@@ -5,7 +5,6 @@ requests-cache
 requests-ratelimiter
 feedparser
 yfinance==0.2.52
-pandas-datareader>=0.10.0
 openpyxl
 scikit-learn
 matplotlib
