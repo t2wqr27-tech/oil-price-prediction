@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade yfinance requests
           # 🔥 2. 加入 "pandas<3.0"，強制使用穩定的 2.x 版本，避免套件衝突
-          pip install "pandas<3.0" numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl
+          pip install "pandas<3.0" numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl tensorflow
 
       - name: Run prediction script
         env:
