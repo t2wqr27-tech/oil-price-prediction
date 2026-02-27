@@ -25,7 +25,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          # 🔥 強制更新 yfinance 和 requests，繞過最新的阻擋機制
+          pip install --upgrade yfinance requests 
+          pip install pandas numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl
 
       - name: Run prediction script
         env:
