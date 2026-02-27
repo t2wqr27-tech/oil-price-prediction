@@ -24,9 +24,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # 🔥 關鍵：將 yfinance 指定為 0.2.44 最穩定版，避免新版 curl_cffi 在雲端主機崩潰
           pip install yfinance==0.2.44 requests
-          pip install "pandas<3.0" numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl tensorflow requests-cache requests-ratelimiter lxml beautifulsoup4
+          # 🔥 補上存檔需要的 pyarrow
+          pip install "pandas<3.0" numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl tensorflow requests-cache requests-ratelimiter lxml beautifulsoup4 pyarrow
 
       - name: Run prediction script
         env:
