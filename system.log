@@ -486,3 +486,48 @@ Traceback (most recent call last):
     if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: ❌ 數據集建立失敗
+2026-02-27 14:41:47,839 - INFO - ✅ 運行模式：即時預測
+2026-02-27 14:41:49,169 - INFO - 📦 嘗試批量下載 Yahoo Finance 首選資料 (已掛載偽裝 Session)...
+2026-02-27 14:41:51,267 - ERROR - 
+5 Failed downloads:
+2026-02-27 14:41:51,268 - ERROR - ['JPY=X', 'KRW=X', 'BZ=F', 'USDTWD=X', '^VIX']: YFRateLimitError('Too Many Requests. Rate limited. Try after a while.')
+2026-02-27 14:41:51,274 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 布蘭特原油 (DCOILBRENTE)...
+2026-02-27 14:41:51,695 - ERROR -    ❌ FRED API 回傳異常 (狀態碼: 400, 訊息: {"error_code":400,"error_message":"Bad Request.  The series does not exist."})
+2026-02-27 14:41:51,695 - ERROR -    🚨 布蘭特原油 所有資料源皆獲取失敗。
+2026-02-27 14:41:51,695 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 台幣匯率 (DEXTAUS)...
+2026-02-27 14:41:52,164 - INFO -    ✅ FRED API 救援大成功: 台幣匯率
+2026-02-27 14:41:52,169 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 日圓匯率 (DEXJPUS)...
+2026-02-27 14:41:52,347 - INFO -    ✅ FRED API 救援大成功: 日圓匯率
+2026-02-27 14:41:52,352 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 韓元匯率 (DEXKOUS)...
+2026-02-27 14:41:52,591 - INFO -    ✅ FRED API 救援大成功: 韓元匯率
+2026-02-27 14:41:52,596 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 恐慌指數 (VIXCLS)...
+2026-02-27 14:41:52,804 - INFO -    ✅ FRED API 救援大成功: 恐慌指數
+2026-02-27 14:41:57,100 - ERROR - ❌ 特徵建立失敗，程式終止: '布蘭特原油'
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3641, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 168, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 197, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7668, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7676, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: '布蘭特原油'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/即時預測.py", line 201, in main
+    build_and_save_features(mode=mode) # 呼叫 build_and_save_features 函式來建立特徵資料，根據 mode 來決定使用哪種模式的特徵資料，這個函式會從爬蟲模組中獲取最新的數據，進行特徵工程處理，並將結果保存為 parquet 檔案，確保後續的分析和預測使用到最新的特徵資料
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/爬蟲整合.py", line 673, in build_and_save_features
+    df_raw = build_refined_dataset(asia_realtime=asia_realtime)  # 步驟 2：執行主要資料收集與爬蟲管線，建立基礎資料集
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/爬蟲整合.py", line 514, in build_refined_dataset
+    df_full['temp_cost'] = df_full['布蘭特原油'] * df_full['台幣匯率']  # 建立臨時欄位：計算純原油的台幣成本
+                           ~~~~~~~^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/frame.py", line 4378, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3648, in get_loc
+    raise KeyError(key) from err
+KeyError: '布蘭特原油'
