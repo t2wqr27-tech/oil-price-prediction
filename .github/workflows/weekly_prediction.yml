@@ -16,18 +16,17 @@ jobs:
           fetch-depth: 0
           ref: main
 
-      - name: Set up Python 3.11
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: '3.12' # 🔥 1. 將 Python 升級到 3.12，滿足 pandas-ta 的要求
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # 🔥 強制更新 yfinance 和 requests，繞過最新的阻擋機制
-          pip install --upgrade yfinance requests 
-          pip install pandas numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl
+          pip install --upgrade yfinance requests
+          # 🔥 2. 加入 "pandas<3.0"，強制使用穩定的 2.x 版本，避免套件衝突
+          pip install "pandas<3.0" numpy xgboost statsmodels feedparser matplotlib scikit-learn shap pandas-ta openpyxl
 
       - name: Run prediction script
         env:
