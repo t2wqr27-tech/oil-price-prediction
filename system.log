@@ -589,3 +589,55 @@ Traceback (most recent call last):
     if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: ❌ 數據集建立失敗
+2026-02-27 15:17:56,914 - INFO - ✅ 運行模式：即時預測
+2026-02-27 15:17:57,776 - ERROR - Failed to get ticker '1671.T' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:17:58,124 - ERROR - $1671.T: possibly delisted; no price data found  (period=5d)
+2026-02-27 15:17:58,485 - ERROR - Failed to get ticker '096770.KS' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:17:58,861 - ERROR - $096770.KS: possibly delisted; no price data found  (period=5d)
+2026-02-27 15:17:58,876 - INFO - 📦 嘗試批量下載 Yahoo Finance 首選資料 (已掛載偽裝 Session)...
+2026-02-27 15:17:59,464 - ERROR - Failed to get ticker 'USDTWD=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:17:59,466 - ERROR - Failed to get ticker 'BZ=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:17:59,839 - ERROR - Failed to get ticker 'JPY=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:17:59,868 - ERROR - Failed to get ticker '^VIX' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:18:00,190 - ERROR - Failed to get ticker 'KRW=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:18:00,192 - ERROR - 
+5 Failed downloads:
+2026-02-27 15:18:00,192 - ERROR - ['USDTWD=X', 'BZ=F', 'JPY=X', '^VIX', 'KRW=X']: YFTzMissingError('$%ticker%: possibly delisted; no timezone found')
+2026-02-27 15:18:00,195 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 布蘭特原油 (DCOILBRENTEU)...
+2026-02-27 15:18:00,646 - INFO -    ✅ FRED API 救援大成功: 布蘭特原油
+2026-02-27 15:18:00,647 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 台幣匯率 (DEXTAUS)...
+2026-02-27 15:18:00,874 - INFO -    ✅ FRED API 救援大成功: 台幣匯率
+2026-02-27 15:18:00,874 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 日圓匯率 (DEXJPUS)...
+2026-02-27 15:18:01,020 - INFO -    ✅ FRED API 救援大成功: 日圓匯率
+2026-02-27 15:18:01,020 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 韓元匯率 (DEXKOUS)...
+2026-02-27 15:18:01,122 - INFO -    ✅ FRED API 救援大成功: 韓元匯率
+2026-02-27 15:18:01,122 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 恐慌指數 (VIXCLS)...
+2026-02-27 15:18:01,317 - INFO -    ✅ FRED API 救援大成功: 恐慌指數
+2026-02-27 15:18:07,007 - ERROR - ❌ 特徵建立失敗，程式終止: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+A suitable version of pyarrow or fastparquet is required for parquet support.
+Trying to import the above resulted in these errors:
+ - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.
+ - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.
+Traceback (most recent call last):
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/即時預測.py", line 201, in main
+    build_and_save_features(mode=mode) # 呼叫 build_and_save_features 函式來建立特徵資料，根據 mode 來決定使用哪種模式的特徵資料，這個函式會從爬蟲模組中獲取最新的數據，進行特徵工程處理，並將結果保存為 parquet 檔案，確保後續的分析和預測使用到最新的特徵資料
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/爬蟲整合.py", line 690, in build_and_save_features
+    df.to_parquet(parquet_path, index=False)  # 將資料表存成 Parquet 檔，不存入 index
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/core/frame.py", line 3124, in to_parquet
+    return to_parquet(
+           ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parquet.py", line 478, in to_parquet
+    impl = get_engine(engine)
+           ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pandas/io/parquet.py", line 68, in get_engine
+    raise ImportError(
+ImportError: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+A suitable version of pyarrow or fastparquet is required for parquet support.
+Trying to import the above resulted in these errors:
+ - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.
+ - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.
