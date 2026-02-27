@@ -555,3 +555,37 @@ Traceback (most recent call last):
     if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 RuntimeError: ❌ 數據集建立失敗
+2026-02-27 15:09:40,186 - INFO - ✅ 運行模式：即時預測
+2026-02-27 15:09:41,991 - ERROR - Failed to get ticker '1671.T' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:42,427 - ERROR - $1671.T: possibly delisted; no price data found  (period=5d)
+2026-02-27 15:09:42,856 - ERROR - Failed to get ticker '096770.KS' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:43,289 - ERROR - $096770.KS: possibly delisted; no price data found  (period=5d)
+2026-02-27 15:09:43,315 - INFO - 📦 嘗試批量下載 Yahoo Finance 首選資料 (已掛載偽裝 Session)...
+2026-02-27 15:09:43,932 - ERROR - Failed to get ticker 'USDTWD=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:43,934 - ERROR - Failed to get ticker 'BZ=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:44,404 - ERROR - Failed to get ticker 'JPY=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:44,409 - ERROR - Failed to get ticker '^VIX' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:44,831 - ERROR - Failed to get ticker 'KRW=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-02-27 15:09:44,839 - ERROR - 
+5 Failed downloads:
+2026-02-27 15:09:44,839 - ERROR - ['USDTWD=X', 'BZ=F', 'JPY=X', '^VIX', 'KRW=X']: YFTzMissingError('$%ticker%: possibly delisted; no timezone found')
+2026-02-27 15:09:44,842 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 布蘭特原油 (DCOILBRENTE)...
+2026-02-27 15:09:45,252 - ERROR -    ❌ FRED API 回傳異常 (狀態碼: 400, 訊息: {"error_code":400,"error_message":"Bad Request.  The series does not exist."})
+2026-02-27 15:09:45,253 - ERROR -    🚨 布蘭特原油 所有資料源皆獲取失敗。
+2026-02-27 15:09:45,253 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 台幣匯率 (DEXTAUS)...
+2026-02-27 15:09:45,435 - INFO -    ✅ FRED API 救援大成功: 台幣匯率
+2026-02-27 15:09:45,435 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 日圓匯率 (DEXJPUS)...
+2026-02-27 15:09:45,661 - INFO -    ✅ FRED API 救援大成功: 日圓匯率
+2026-02-27 15:09:45,662 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 韓元匯率 (DEXKOUS)...
+2026-02-27 15:09:45,856 - INFO -    ✅ FRED API 救援大成功: 韓元匯率
+2026-02-27 15:09:45,857 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 恐慌指數 (VIXCLS)...
+2026-02-27 15:09:46,011 - INFO -    ✅ FRED API 救援大成功: 恐慌指數
+2026-02-27 15:09:50,324 - ERROR - ❌ 特徵建立失敗，程式終止: ❌ 數據集建立失敗
+Traceback (most recent call last):
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/即時預測.py", line 201, in main
+    build_and_save_features(mode=mode) # 呼叫 build_and_save_features 函式來建立特徵資料，根據 mode 來決定使用哪種模式的特徵資料，這個函式會從爬蟲模組中獲取最新的數據，進行特徵工程處理，並將結果保存為 parquet 檔案，確保後續的分析和預測使用到最新的特徵資料
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/oil-price-prediction/oil-price-prediction/爬蟲整合.py", line 682, in build_and_save_features
+    if df_raw.empty: raise RuntimeError("❌ 數據集建立失敗")  # 如果資料是空的，拋出嚴重錯誤終止程式
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ❌ 數據集建立失敗
