@@ -509,14 +509,14 @@ def main(): # 定義主函式，作為整個預測系統的入口點，負責協
             
         elif current_vol < VOL_THRESHOLD_LOW: # 如果當前的波動率小於低波動率閾值，則認為市場處於低波動狀態，這樣可以在進行體制轉換決策時使用這個條件來判斷當前的市場狀態，提供一個全面的分析結果來驗證模型的預測能力，同時幫助識別可能存在的市場波動影響問題
             logging.info(f"🛶 [低波動] {current_vol:.2f} < {VOL_THRESHOLD_LOW} -> 回歸 ARIMA") 
-            p_theoretical = 0.60 * pred_ai_raw + 0.40 * p_diff_arima # 🔥 (已修改) 解放 AI！給予至少 60% 的保底權重
+            p_theoretical = 0.80 * pred_ai_raw + 0.20 * p_diff_arima # 🔥 (已修改) 解放 AI！給予至少 60% 的保底權重
             final_strategy = "Regime Switching (Low Vol)" 
             
         else:
             ratio = (current_vol - VOL_THRESHOLD_LOW) / (VOL_THRESHOLD_HIGH - VOL_THRESHOLD_LOW) # 在中波動狀態下，計算當前波動率在低波動率閾值和高波動率閾值之間的位置比例，這樣可以在進行體制轉換決策時使用這個比例來動態調整 AI 預測和 ARIMA 預測的權重，提供一個全面的分析結果來驗證模型的預測能力，同時幫助識別可能存在的市場波動影響問題
             ratio = np.clip(ratio, 0, 1) # 防呆確保 ratio 在 0~1 之間
             # 🔥 (已修改) 解放 AI！給予蘊含真實公式的 AI 至少 60% 的保底權重
-            w_ai = 0.60 + ratio * (0.35) 
+            w_ai = 0.80 + ratio * (0.15) 
             w_arima = 1.0 - w_ai 
             
             logging.info(f"⚖️ [中波動] {current_vol:.2f} -> 混合權重 (AI: {w_ai:.2f})") # 在中波動狀態下，記錄 AI 預測和 ARIMA 預測的權重，這樣可以在進行體制轉換決策時提供一個透明的分析結果來驗證模型的預測能力，同時幫助識別可能存在的市場波動影響問題
@@ -745,4 +745,5 @@ def main(): # 定義主函式，作為整個預測系統的入口點，負責協
 if __name__ == "__main__":
 
     main()
+
 
