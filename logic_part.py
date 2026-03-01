@@ -90,53 +90,60 @@ def apply_smart_filter(pred_val, lock_level, current_price, p_arima, # 這裡是
             
     return pred_val # 最後返回經過智慧濾網調整後的預測值
 
-def hybrid_predict_value(train, X_last, xgb_feats, lstm_feats=None, use_lstm=False, optimize=False): # 混合預測函數，結合 ARIMA 預測的殘差和 XGBoost 的預測，專注於捕捉 ARIMA 無法解釋的部分，讓我們的混合預測更強大、更靈活，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-    train = train.copy() # 確保不修改原始資料
-    X_last = X_last.copy() # 確保不修改原始資料
+def hybrid_predict_value(train, X_last, xgb_feats, lstm_feats=None, use_lstm=False, optimize=False): 
+    train = train.copy() 
+    X_last = X_last.copy() 
     
-    features_to_use = list(xgb_feats) # + (list(lstm_feats) if use_lstm and lstm_feats is not None else [])
-    y_true = train['y'].values # 真實的變化量 (價格差)，作為殘差計算的基礎，讓 XGBoost 專注於學習 ARIMA 無法捕捉的部分
-    X_train_full = train[features_to_use] # 使用完整的特徵集訓練 XGBoost，讓它有更多資訊來學習複雜的模式
+    features_to_use = list(xgb_feats) 
+    y_true = train['y'].values 
+    X_train_full = train[features_to_use] 
     
-    # 建立 ARIMA 殘差 #這裡我們使用前一週的變化量作為 ARIMA 模擬預測的基礎，並乘以 0.5 來模擬 ARIMA 預測的效果，讓 XGBoost 專注於學習剩餘的殘差，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-    arima_simulated_train = train['y'].shift(1).fillna(0).values * 0.5 + \
-                            train['y'].rolling(3).mean().shift(1).fillna(0).values * 0.5 # 模擬 ARIMA 預測的效果，讓 XGBoost 專注於學習剩餘的殘差
-    y_residuals = y_true - arima_simulated_train # 真實變化量減去 ARIMA 模擬預測，得到殘差，這是 XGBoost 要學習的目標，專注於捕捉 ARIMA 無法解釋的部分
-    
-    # --- 🔥 修改點 1：權重優化 (解決不敢猜漲的問題) ---
-    # 原始的時間權重 (越近越重要)
-    time_weights = np.linspace(0.5, 1.5, len(train)) # 從 0.5 緩慢增加到 1.5，讓模型更重視近期的數據，這對於捕捉轉折點非常重要
-    
-    # 新增：方向權重 (Directional Weights)
-    # 如果真實結果是漲的 (y_residuals > 0)，我們給它 1.3 倍的權重
-    # 這會強迫 XGBoost 對「漏看上漲」感到更痛苦
-    dir_weights = np.where(y_residuals > 0, 1.1, 1.0) # 漲的給 1.1 倍權重，跌的保持 1.0，這樣模型會更積極地學習漲的模式，減少漏看轉折點的情況
-    
-    # 結合兩種權重
-    final_weights = time_weights * dir_weights # 最終權重是時間權重和方向權重的乘積，讓模型同時考慮數據的新鮮度和漲跌的重要性
+    bundle = {} 
 
-    bundle = {} # 用於存儲模型和其他相關資訊的容器，方便在回測過程中重複使用，避免頻繁訓練模型造成的效率問題
+    # ---------------------------------------------------------
+    # 階段一：建立「中油基準公式」模型 (Baseline Model)
+    # ---------------------------------------------------------
+    if '成本週變動' in train.columns:
+        # 🔥 真實物理公式：1桶=159公升
+        train_base_pred = (train['成本週變動'] / 159.0) * 0.8
+        test_base_pred = (X_last['成本週變動'].values[0] / 159.0) * 0.8
+        bundle['base_model'] = "True_Math_Formula" 
+    else:
+        # 防呆機制
+        train_base_pred = train['y'].shift(1).fillna(0).values * 0.5 + \
+                          train['y'].rolling(3).mean().shift(1).fillna(0).values * 0.5
+        test_base_pred = 0.0 
+
+    y_residuals = y_true - train_base_pred 
+    
+    # --- 權重優化 ---
+    time_weights = np.linspace(0.5, 1.5, len(train)) 
+    dir_weights = np.where(y_residuals > 0, 1.1, 1.0) 
+    final_weights = time_weights * dir_weights 
 
     # XGBoost 參數調整
     xgb_m = xgb.XGBRegressor( 
-        n_estimators=1300, # 🔥 微調：增加樹的數量，讓模型有更多機會學習複雜的模式
-        max_depth=5,            # 🔥 微調：深度稍微加深一點，讓它學習更複雜的轉折特徵
-        learning_rate=0.015,    # 🔥 微調：學習率稍微再低一點
-        subsample=0.8, # 🔥 放寬 Subsample，讓模型在訓練時能看到更多樣的數據，增加穩定性
-        colsample_bytree=0.8, # 🔥 放寬 Colsample，讓模型在每棵樹訓練時能使用更多的特徵，增加學習能力
-        gamma=0.1,              # 🔥 放寬 Gamma，讓模型更容易分裂節點
-        min_child_weight=3, # 🔥 放寬 Min Child Weight，讓模型更容易分裂節點
-        objective='reg:squarederror', # 回歸問題
-        n_jobs=-1, # 使用所有 CPU 核心加速訓練
-        random_state=SEED # 固定隨機種子，確保結果可重現
+        n_estimators=1300, 
+        max_depth=5,            
+        learning_rate=0.015,    
+        subsample=0.8, 
+        colsample_bytree=0.8, 
+        gamma=0.1,              
+        min_child_weight=3, 
+        objective='reg:squarederror', 
+        n_jobs=-1, 
+        random_state=SEED 
     )
     
-    # 使用 final_weights 進行訓練
-    xgb_m.fit(X_train_full, y_residuals, sample_weight=final_weights, verbose=False) # verbose=False 讓訓練過程更乾淨，避免過多的輸出干擾觀察
-    bundle['xgb'] = xgb_m # 將訓練好的 XGBoost 模型存入 bundle，方便在回測過程中重複使用，避免頻繁訓練模型造成的效率問題
-    pred_residual = xgb_m.predict(X_last[features_to_use])[0] # 預測殘差，這是 AI 預測的核心，代表了 ARIMA 無法捕捉的部分，讓我們的混合預測更強大、更靈活
+    xgb_m.fit(X_train_full, y_residuals, sample_weight=final_weights, verbose=False) 
+    bundle['xgb'] = xgb_m 
+    
+    xgb_pred_residual = xgb_m.predict(X_last[features_to_use])[0] 
+    
+    # 🔥 階段三：實戰預測 (公式基準 + AI殘差)
+    final_ai_pred = test_base_pred + xgb_pred_residual
 
-    return pred_residual, bundle # 返回預測的殘差和模型 bundle，讓回測函數可以重複使用訓練好的模型，提升效率
+    return final_ai_pred, bundle
 
 def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_weeks=52, retrain_freq=4): # 回測函數，實現雙重確認架構，結合 ARIMA 預測、AI 預測和智慧濾網，並加入動態權重調整和成交量過濾，專注於捕捉轉折點和 V 型反轉
     df = df.sort_values('日期').copy().reset_index(drop=True) # 確保資料按照日期排序，並重置索引，避免因為資料順序問題導致的錯誤，這對於時序分析非常重要
@@ -164,14 +171,22 @@ def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_
         p_arima = arima_forecast(history_series) # 使用 ARIMA 模型進行預測，這是我們混合預測的第一步，ARIMA 專注於捕捉短期動能，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的混合預測更強大、更靈活，提高預測的準確性和穩定性
 
         # 2. Hybrid AI
-        if (cached_bundle is None) or ((i - start_idx) % retrain_freq == 0): # 每隔 retrain_freq 週重新訓練 AI 模型，確保模型能夠適應市場的變化，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地反應市場變化，提高預測的準確性和穩定性
-            train = df.iloc[max(0, i-104):i].copy().dropna(subset=['y']) # 取出過去 104 週的數據作為訓練集，確保我們有足夠的數據來支持 AI 模型的訓練，特別是在捕捉轉折點和 V 型反轉時，這可以讓 AI 模型更好地學習市場的複雜模式，提高預測的準確性和穩定性
-            if len(train) < min_train_weeks: continue # 如果訓練數據不足，跳過這次預測，確保模型的穩定性和準確性，特別是在捕捉轉折點和 V 型反轉時，這是非常重要的
-            pred_residual, cached_bundle = hybrid_predict_value(train, X_last, xgb_feats, lstm_feats) # 使用混合預測函數進行預測，這是我們混合預測的第二步，AI 模型專注於捕捉 ARIMA 無法解釋的部分，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的混合預測更強大、更靈活，提高預測的準確性和穩定性
+        if (cached_bundle is None) or ((i - start_idx) % retrain_freq == 0): 
+            # ... (這部分不動) ...
+            pred_residual, cached_bundle = hybrid_predict_value(train, X_last, xgb_feats, lstm_feats) 
         else:
-            for f in xgb_feats: # 確保 X_last 包含所有 XGBoost 需要的特徵，即使某些特徵在當前行缺失，也要補齊為 0，避免預測過程中因為缺少特徵而出錯，這對於保持模型的穩定性和準確性非常重要，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更即時地反應市場變化，提高預測的準確性和穩定性
-                if f not in X_last.columns: X_last[f] = 0 # 補齊缺失的特徵，確保預測過程的穩定性和準確性，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更即時地反應市場變化，提高預測的準確性和穩定性
-            pred_residual = cached_bundle['xgb'].predict(X_last[xgb_feats])[0] # 使用緩存的 XGBoost 模型進行預測，這是我們混合預測的第二步，AI 模型專注於捕捉 ARIMA 無法解釋的部分，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的混合預測更強大、更靈活，提高預測的準確性和穩定性
+            for f in xgb_feats: 
+                if f not in X_last.columns: X_last[f] = 0 
+            
+            xgb_pred_residual = cached_bundle['xgb'].predict(X_last[xgb_feats])[0] 
+            
+            # 🔥 取得「中油真實物理數學公式」的理論預測
+            if '成本週變動' in X_last.columns:
+                test_base_pred = (X_last['成本週變動'].values[0] / 159.0) * 0.8
+            else:
+                test_base_pred = 0.0
+                
+            pred_residual = test_base_pred + xgb_pred_residual
 
         # 3. 動態權重
         current_vol = df.iloc[max(0, i-5):i][oil].diff().std() # 計算過去 5 週的價格變化量的標準差作為當前的波動率
@@ -320,3 +335,4 @@ def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_
         w_ai_history.append(final_w_ai) 
 
     return np.array(y_true), np.array(y_ai), np.array(y_arima), dates_test, lstm_flags, np.array(w_ai_history)
+
