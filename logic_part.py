@@ -174,156 +174,149 @@ def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_
             pred_residual = cached_bundle['xgb'].predict(X_last[xgb_feats])[0] # 使用緩存的 XGBoost 模型進行預測，這是我們混合預測的第二步，AI 模型專注於捕捉 ARIMA 無法解釋的部分，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的混合預測更強大、更靈活，提高預測的準確性和穩定性
 
         # 3. 動態權重
-        current_vol = df.iloc[max(0, i-5):i][oil].diff().std() # 計算過去 5 週的價格變化量的標準差作為當前的波動率，這將用於動態權重調整，讓模型能夠根據市場的波動性來調整 ARIMA 和 AI 預測的權重，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
-        if np.isnan(current_vol): current_vol = 0.0 # 如果計算出來的波動率是 NaN，將其設置為 0.0，這是為了避免在後續的權重計算中出現錯誤，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-        hist_vol_window = rolling_vol_series.iloc[max(0, i-52):i] # 取出過去 52 週的滾動波動率作為歷史波動率的參考，這將用於動態權重調整，讓模型能夠根據市場的波動性來調整 ARIMA 和 AI 預測的權重，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
+        current_vol = df.iloc[max(0, i-5):i][oil].diff().std() # 計算過去 5 週的價格變化量的標準差作為當前的波動率
+        if np.isnan(current_vol): current_vol = 0.0 # 防呆機制
+        hist_vol_window = rolling_vol_series.iloc[max(0, i-52):i] # 取出過去 52 週的滾動波動率作為歷史波動率的參考
         
-        if len(hist_vol_window.dropna()) > 20: # 如果有足夠的歷史波動率數據，使用分位數來確定高低波動率的門檻，這是為了讓權重調整更具適應性，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
-            VOL_HIGH = hist_vol_window.quantile(0.8) # 高波動率門檻設置為 80 分位數，這意味著當前的波動率高於過去 80% 的波動率時，我們認為市場處於高波動狀態，這將影響我們對 ARIMA 和 AI 預測的權重分配，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
-            VOL_LOW = hist_vol_window.quantile(0.3) # 低波動率門檻設置為 30 分位數，這意味著當前的波動率低於過去 30% 的波動率時，我們認為市場處於低波動狀態，這將影響我們對 ARIMA 和 AI 預測的權重分配，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
+        if len(hist_vol_window.dropna()) > 20: 
+            VOL_HIGH = hist_vol_window.quantile(0.8) 
+            # 🔥 修改 1：調降低波動門檻為 0.15，避免系統太容易進入死水期
+            VOL_LOW = hist_vol_window.quantile(0.15) 
         else:
-            VOL_HIGH, VOL_LOW = 1.0, 0.5 # 如果歷史波動率數據不足，使用預設的高低波動率門檻，這是為了確保權重調整的穩定性，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
+            VOL_HIGH, VOL_LOW = 1.0, 0.5 
         
-        if VOL_HIGH - VOL_LOW == 0: ratio = 0.5 # 如果高低波動率門檻相等，將比例設置為 0.5，這是為了避免除以零的錯誤，並且在這種情況下，我們認為市場的波動性處於中等水平，因此給予 ARIMA 和 AI 預測相等的權重，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-        else: ratio = (current_vol - VOL_LOW) / (VOL_HIGH - VOL_LOW) # 計算當前波動率在高低波動率門檻之間的位置，這將用於動態權重調整，讓模型能夠根據市場的波動性來調整 ARIMA 和 AI 預測的權重，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更靈活地適應不同的市場環境，提高預測的準確性和穩定性
-        ratio = np.clip(ratio, 0, 1) # 將比例限制在 0 和 1 之間，確保權重調整的合理性，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-        final_w_ai = 0.3 + (ratio * 0.6) # 根據波動率動態調整 AI 預測的權重，當市場波動率較高時，增加 AI 預測的權重，讓模型更靈活地適應高波動的市場環境；當市場波動率較低時，減少 AI 預測的權重，讓模型更穩定地運行，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更準確地反應市場變化，提高預測的準確性和穩定性
+        if VOL_HIGH - VOL_LOW == 0: ratio = 0.5 
+        else: ratio = (current_vol - VOL_LOW) / (VOL_HIGH - VOL_LOW) 
+        ratio = np.clip(ratio, 0, 1) 
+        
+        # 🔥 修改 2：解放 AI 權重！因為 AI 內含真實中油公式，保底給予 60% 權重，最高至 95%
+        final_w_ai = 0.60 + (ratio * 0.35) 
 
         # 4. 原始混合
-        raw_hybrid = p_arima + (final_w_ai * pred_residual)# 這是我們混合預測的核心，將 ARIMA 預測和 AI 預測結合起來，並根據市場的波動性動態調整 AI 預測的權重，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的混合預測更強大、更靈活，提高預測的準確性和穩定性
+        raw_hybrid = p_arima + (final_w_ai * pred_residual)
         
         # 5. 偏差修正
-        if len(error_history) >= 4: # 如果有足夠的歷史誤差數據，計算最近 4 週的平均誤差作為偏差修正，這是為了讓模型能夠根據過去的表現進行自我調整，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-            bias_correction = np.mean(error_history[-4:]) * 0.25 # 偏差修正的強度設置為 0.25，這意味著我們不會完全修正過去的誤差，而是只修正其中的一部分，這是為了避免過度修正導致模型反應過度，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
+        if len(error_history) >= 4: 
+            bias_correction = np.mean(error_history[-4:]) * 0.25 
         else:
-            bias_correction = 0.0 # 如果歷史誤差數據不足，則不進行偏差修正，這是為了確保模型的穩定性，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-        corrected_hybrid = raw_hybrid - bias_correction # 將偏差修正應用到混合預測中，這是我們混合預測的最後一步，讓模型能夠根據過去的表現進行自我調整，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
+            bias_correction = 0.0 
+        corrected_hybrid = raw_hybrid - bias_correction 
         
         # =========================================================
         # 🔥🔥🔥 [核心] 61% 衝刺：雙重確認架構 🔥🔥🔥
         # =========================================================
-        hist_slice = df.iloc[max(0, i-35):i+1][oil] # 取出過去 35 週的價格作為技術指標的計算基礎，這是我們進行雙重確認的核心數據來源，確保我們有足夠的歷史價格資訊來計算各種技術指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的雙重確認架構更強大、更靈活，提高預測的準確性和穩定性
+        hist_slice = df.iloc[max(0, i-35):i+1][oil] 
         
-        ma5 = hist_slice.tail(5).mean() # 計算過去 5 週的移動平均線，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解短期的價格趨勢，提高預測的準確性和穩定性
-        ma10 = hist_slice.tail(10).mean() # 計算過去 10 週的移動平均線，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解中期的價格趨勢，提高預測的準確性和穩定性
-        ma20 = hist_slice.tail(20).mean() # 計算過去 20 週的移動平均線，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解長期的價格趨勢，提高預測的準確性和穩定性
+        ma5 = hist_slice.tail(5).mean() 
+        ma10 = hist_slice.tail(10).mean() 
+        ma20 = hist_slice.tail(20).mean() 
         
         # MACD
-        exp12 = hist_slice.ewm(span=12, adjust=False).mean() # 計算過去 12 週的指數移動平均線，這是 MACD 指標計算的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解短期的動能變化，提高預測的準確性和穩定性
-        exp26 = hist_slice.ewm(span=26, adjust=False).mean() # 計算過去 26 週的指數移動平均線，這是 MACD 指標計算的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解長期的動能變化，提高預測的準確性和穩定性
-        macd = exp12 - exp26 # 計算 MACD 線，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        macd_hist = macd - macd.ewm(span=9, adjust=False).mean() # 計算 MACD 的柱狀圖，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        exp12 = hist_slice.ewm(span=12, adjust=False).mean() 
+        exp26 = hist_slice.ewm(span=26, adjust=False).mean() 
+        macd = exp12 - exp26 
+        macd_hist = macd - macd.ewm(span=9, adjust=False).mean() 
         
-        if len(macd_hist) < 2: # 如果 MACD 柱狀圖的數據不足，則無法計算動能變化，這是為了確保我們的雙重確認架構的穩定性和準確性，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更穩定地運行，提高預測的準確性和穩定性
-            curr_hist, prev_hist = 0.0, 0.0 # 如果數據不足，將當前和前一個柱狀圖值設置為 0.0，這是為了確保我們的雙重確認架構的穩定性和準確性，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更穩定地運行，提高預測的準確性和穩定性
+        if len(macd_hist) < 2: 
+            curr_hist, prev_hist = 0.0, 0.0 
         else:
-            curr_hist = macd_hist.iloc[-1] # 取出當前的 MACD 柱狀圖值，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-            prev_hist = macd_hist.iloc[-2] # 取出前一個的 MACD 柱狀圖值，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+            curr_hist = macd_hist.iloc[-1] 
+            prev_hist = macd_hist.iloc[-2] 
             
-        is_momentum_up = (curr_hist > prev_hist) # 判斷當前的動能是否在增強，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        is_momentum_down = (curr_hist < prev_hist) # 判斷當前的動能是否在減弱，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        curr_macd = curr_hist # 將當前的 MACD 柱狀圖值存儲在 curr_macd 變量中，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        is_momentum_up = (curr_hist > prev_hist) 
+        is_momentum_down = (curr_hist < prev_hist) 
+        curr_macd = curr_hist 
         
-        delta = hist_slice.diff() # 計算價格的變化量，這是 RSI 指標計算的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        gain = (delta.where(delta > 0, 0)).ewm(alpha=1/14, adjust=False).mean() # 計算平均漲幅，這是 RSI 指標計算的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        loss = (-delta.where(delta < 0, 0)).ewm(alpha=1/14, adjust=False).mean() # 計算平均跌幅，這是 RSI 指標計算的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        rs = gain / (loss + 1e-9) # 計算相對強弱指標的基礎值，這是 RSI 指標計算的核心，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        current_rsi = 100 - (100 / (1 + rs)).iloc[-1] # 計算當前的 RSI 值，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        delta = hist_slice.diff() 
+        gain = (delta.where(delta > 0, 0)).ewm(alpha=1/14, adjust=False).mean() 
+        loss = (-delta.where(delta < 0, 0)).ewm(alpha=1/14, adjust=False).mean() 
+        rs = gain / (loss + 1e-9) 
+        current_rsi = 100 - (100 / (1 + rs)).iloc[-1] 
         
-        bias_pct = (current_price - ma5) / ma5 # 計算價格與 MA5 的偏離程度，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的短期趨勢，提高預測的準確性和穩定性
+        bias_pct = (current_price - ma5) / ma5 
         
         # --- 狀態判定 ---
         
         # 1. 搶反彈優化
-        is_extreme_oversold = (current_rsi < 30) # 當 RSI 低於 30 時，認為市場處於極度超賣狀態，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        is_extreme_oversold = (current_rsi < 30) 
         
         # 🔥 新增：RSI 背離偵測 (簡單版)
-        # 如果價格破底 (current_price < prev_price) 但 RSI 墊高 (current_rsi > prev_rsi)
-        prev_rsi = 100 - (100 / (1 + (rs.shift(1).iloc[-1]))) # 計算前一個的 RSI 值，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
-        is_rsi_divergence = (current_price < prev_price) and (current_rsi > prev_rsi) and (current_rsi < 50) # 背離條件：價格創新低但 RSI 沒有跟著創新低，且 RSI 不處於過熱區，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        prev_rsi = 100 - (100 / (1 + (rs.shift(1).iloc[-1]))) 
+        is_rsi_divergence = (current_price < prev_price) and (current_rsi > prev_rsi) and (current_rsi < 50) 
 
         # 反彈條件放寬：加入背離偵測
-        is_normal_rebound = (bias_pct < -0.015 and is_momentum_up) # 當價格偏離 MA5 超過 1.5% 且動能開始增強時，認為可能出現反彈，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的短期趨勢，提高預測的準確性和穩定性
-        is_rebound = is_extreme_oversold or is_normal_rebound or is_rsi_divergence # 只要滿足任一條件，就認為可能出現反彈，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        is_normal_rebound = (bias_pct < -0.015 and is_momentum_up) 
+        is_rebound = is_extreme_oversold or is_normal_rebound or is_rsi_divergence 
             
-        # 2. 過熱 (保持原樣或微調)
-        is_overbought = (current_rsi > 80 and is_momentum_down) # 門檻提高到 80，避免太早下車
+        # 2. 過熱 
+        is_overbought = (current_rsi > 80 and is_momentum_down) 
         
-        # 3. 價格行為否決條件 (更精確)
-        # 只有當「收盤價 < 開盤價」且「跌破 MA5」才算真正的 Dropping
-        # 原本只看 current_price < prev_price (昨天比今天)，這可能會誤殺「開低走高」的紅K
-        # 建議加入 Open Price 比較 (如果資料源有)，如果沒有，暫時維持原樣但加上 Momentum 濾網
-        is_price_dropping = (current_price < prev_price) and (current_price < ma5) and (not is_momentum_up) # 價格下跌且跌破 MA5，且動能沒有增強，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的動能變化，提高預測的準確性和穩定性
+        # 3. 價格行為否決條件
+        is_price_dropping = (current_price < prev_price) and (current_price < ma5) and (not is_momentum_up) 
         
         # 🔥 [雙重確認] 趨勢健康度
-        # 必須同時滿足：站上 MA20 (生命線) 且 短線 MA5 > MA20 (多頭排列)
-        trend_health = (current_price > ma20) and (ma5 > ma20) # 趨勢健康度指標，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解價格的整體趨勢，提高預測的準確性和穩定性
+        trend_health = (current_price > ma20) and (ma5 > ma20) 
 
         # 4. 鎖定等級
-        lock_level = 0 # 根據多個技術指標來評估當前的市場狀態，這是我們雙重確認架構中的一個重要指標，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-        if ma5 > ma10: lock_level += 1 # 短期趨勢向上
-        if current_price > ma5: lock_level += 1 # 價格站上短期均線
-        if curr_hist > 0: lock_level += 1 # MACD 動能為正
-        if p_arima > 0.15: lock_level += 1 # ARIMA 預測顯著向上
+        lock_level = 0 
+        if ma5 > ma10: lock_level += 1 
+        if current_price > ma5: lock_level += 1 
+        if curr_hist > 0: lock_level += 1 
+        if p_arima > 0.15: lock_level += 1 
         
         # --- 評分機制 ---
-        if is_overbought: # 過熱狀態，對混合預測進行負向修正，這是為了讓模型在過熱的市場環境中更謹慎地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-            corrected_hybrid -= 0.05 # 過熱狀態下，降低預測值，這是為了讓模型在過熱的市場環境中更謹慎地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-        elif is_rebound: # 反彈狀態，對混合預測進行正向修正，這是為了讓模型在可能出現反彈的市場環境中更積極地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-            corrected_hybrid += 0.07 
+        if is_overbought: 
+            corrected_hybrid -= 0.05 
+        elif is_rebound: 
+            corrected_hybrid += 0.07  
         else:
-            if lock_level >= 3: # 鎖定等級高，表示多個指標同時看多，對混合預測進行較強的正向修正，這是為了讓模型在多個指標都看多的市場環境中更積極地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-                corrected_hybrid += 0.08 
-            elif lock_level == 2: # 鎖定等級中等，表示有一些指標看多，對混合預測進行適度的正向修正，這是為了讓模型在部分指標看多的市場環境中更積極地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
-                corrected_hybrid += 0.05 
-            elif lock_level <= 1: # 鎖定等級低，表示大多數指標不看多，對混合預測進行負向修正，這是為了讓模型在大多數指標不看多的市場環境中更謹慎地預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
+            if lock_level >= 3: 
+                corrected_hybrid += 0.08  
+            elif lock_level == 2: 
+                corrected_hybrid += 0.05  
+            elif lock_level <= 1: 
                 corrected_hybrid -= 0.02
         # ==========================================
         # 🔥 新增：成交量計算區塊
         # ==========================================
-        # 假設你的 DataFrame 欄位名稱是 'Volume' 或 'Vol'
-        # 為了安全，我們先檢查欄位是否存在
-        vol_col = 'Volume' if 'Volume' in df.columns else 'Vol.' # 常見的成交量欄位名稱，根據你的資料來源可能會有所不同，請根據實際情況調整
+        vol_col = 'Volume' if 'Volume' in df.columns else 'Vol.' 
         
-        if vol_col in df.columns: # 如果資料中有成交量欄位，則進行成交量相關的計算，這是為了讓我們的智慧濾網能夠根據市場的活躍程度來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-            # 取出過去 5 天的成交量
-            vol_slice = df.iloc[max(0, i-4):i+1][vol_col] # 取出過去 5 天的成交量，這將用於計算當前成交量與過去平均成交量的比率，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的活躍程度，提高預測的準確性和穩定性
-            current_volume = vol_slice.iloc[-1] # 當前的成交量，這將用於計算當前成交量與過去平均成交量的比率，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的活躍程度，提高預測的準確性和穩定性
-            ma5_volume = vol_slice.mean() # 過去 5 天的平均成交量，這將用於計算當前成交量與過去平均成交量的比率，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的活躍程度，提高預測的準確性和穩定性
+        if vol_col in df.columns: 
+            vol_slice = df.iloc[max(0, i-4):i+1][vol_col] 
+            current_volume = vol_slice.iloc[-1] 
+            ma5_volume = vol_slice.mean() 
             
-            # 避免除以 0 的錯誤
-            if ma5_volume == 0: # 如果過去 5 天的平均成交量為 0，則將比率設置為 1.0，這是為了避免除以零的錯誤，並且在這種情況下，我們認為市場的活躍程度無法評估，因此不對預測進行過濾，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更穩定地運行，提高預測的準確性和穩定性
-                vol_ratio = 1.0 # 如果平均成交量為 0，則不進行過濾，這是為了確保模型的穩定性，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更穩定地運行，提高預測的準確性和穩定性
+            if ma5_volume == 0: 
+                vol_ratio = 1.0 
             else:
-                vol_ratio = current_volume / ma5_volume # 計算當前成交量與過去平均成交量的比率，這將用於智慧濾網的調整，讓模型能夠根據市場的活躍程度來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
+                vol_ratio = current_volume / ma5_volume 
         else:
-            # 如果資料沒有成交量，預設為 1.0 (不做過濾)
-            vol_ratio = 1.0 # 如果沒有成交量資料，則不進行過濾，這是為了確保模型的穩定性，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更穩定地運行，提高預測的準確性和穩定性
+            vol_ratio = 1.0 
         
         # 6. 智慧濾網
         filtered_hybrid = apply_smart_filter( 
-            corrected_hybrid, lock_level, current_price, p_arima, # 將 ARIMA 預測值傳遞給智慧濾網，讓模型能夠根據 ARIMA 的預測來調整最終的預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-            is_rebound, is_overbought, is_price_dropping, # 這些狀態判定將用於智慧濾網的評分機制，讓模型能夠根據當前的市場狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-            is_momentum_up, curr_macd, trend_health, # 這些技術指標將用於智慧濾網的判斷，讓模型能夠根據市場的技術狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-            vol_ratio=vol_ratio # 將成交量比率傳遞給智慧濾網，讓模型能夠根據市場的活躍程度來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
+            corrected_hybrid, lock_level, current_price, p_arima, 
+            is_rebound, is_overbought, is_price_dropping, 
+            is_momentum_up, curr_macd, trend_health, 
+            vol_ratio=vol_ratio 
         )
         
         # 7. 政策與記錄
-        pred_price_raw = current_price + filtered_hybrid # 將混合預測的變化量加回當前價格，得到原始的預測價格，這是我們混合預測的最後一步，讓模型能夠根據 ARIMA 和 AI 的結合來預測未來的價格變化，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們的預測更強大、更靈活，提高預測的準確性和穩定性
-        last_row_dict = df.iloc[i].to_dict() # 取出當前行的數據並轉換為字典，這將用於政策天花板的應用，讓模型能夠根據當前的市場狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-        pred_price_ceiling = apply_asia_ceiling(pred_price_raw, oil, last_row_dict) # 將原始預測價格應用亞洲天花板政策，這是我們混合預測的最後一步，讓模型能夠根據當前的市場狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-        diff_after_ceiling = pred_price_ceiling - current_price # 計算應用天花板政策後的預測價格變化量，這是我們混合預測的最後一步，讓模型能夠根據當前的市場狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
-        final_pred = apply_smoothing(diff_after_ceiling, oil) # 將預測價格變化量應用平滑處理，這是我們混合預測的最後一步，讓模型能夠根據當前的市場狀態來調整預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解市場的動態，提高預測的準確性和穩定性
+        pred_price_raw = current_price + filtered_hybrid 
+        last_row_dict = df.iloc[i].to_dict() 
+        pred_price_ceiling = apply_asia_ceiling(pred_price_raw, oil, last_row_dict) 
+        diff_after_ceiling = pred_price_ceiling - current_price 
+        final_pred = apply_smoothing(diff_after_ceiling, oil) 
         
-        actual_diff = df[oil].iloc[i+1] - df[oil].iloc[i] # 計算實際的價格變化量，這是我們評估預測準確性的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        current_error = filtered_hybrid - actual_diff # 計算當前的預測誤差，這是我們評估預測準確性的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        error_history.append(current_error) # 將當前的預測誤差添加到歷史誤差列表中，這是為了讓模型能夠根據過去的表現進行自我調整，特別是在捕捉轉折點和 V 型反轉時，這可以讓模型更穩定地運行，提高預測的準確性和穩定性
+        actual_diff = df[oil].iloc[i+1] - df[oil].iloc[i] 
+        current_error = filtered_hybrid - actual_diff 
+        error_history.append(current_error) 
         
-        y_true.append(actual_diff) # 將實際的價格變化量添加到真實值列表中，這是我們評估預測準確性的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        y_ai.append(final_pred) # 將最終的預測價格變化量添加到 AI 預測列表中，這是我們評估 AI 預測準確性的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        y_arima.append(p_arima) # 將 ARIMA 的預測價格變化量添加到 ARIMA 預測列表中，這是我們評估 ARIMA 預測準確性的基礎，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        dates_test.append(df['日期'].iloc[i]) # 將當前的日期添加到測試日期列表中，這是為了讓我們能夠在後續的分析中將預測結果與具體的日期對應起來，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        lstm_flags.append(1) # 將 LSTM 的預測標記為 1，這是為了讓我們能夠在後續的分析中區分 LSTM 預測和其他模型的預測，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
-        w_ai_history.append(final_w_ai) # 將當前的 AI 權重添加到歷史權重列表中，這是為了讓我們能夠在後續的分析中了解 AI 預測在整個測試期間的權重變化，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
+        y_true.append(actual_diff) 
+        y_ai.append(final_pred) 
+        y_arima.append(p_arima) 
+        dates_test.append(df['日期'].iloc[i]) 
+        lstm_flags.append(1) 
+        w_ai_history.append(final_w_ai) 
 
-    return np.array(y_true), np.array(y_ai), np.array(y_arima), dates_test, lstm_flags, np.array(w_ai_history) # 返回真實值、AI 預測值、ARIMA 預測值、測試日期、LSTM 預測標記和 AI 權重歷史，這是我們整個預測過程的最終輸出，特別是在捕捉轉折點和 V 型反轉時，這可以讓我們更好地理解模型的表現，提高預測的準確性和穩定性
+    return np.array(y_true), np.array(y_ai), np.array(y_arima), dates_test, lstm_flags, np.array(w_ai_history)
