@@ -172,7 +172,10 @@ def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_
 
         # 2. Hybrid AI
         if (cached_bundle is None) or ((i - start_idx) % retrain_freq == 0): 
-            # ... (這部分不動) ...
+            # 🔥 這裡是不小心被刪除的拼圖！補回來就不會報錯了
+            train = df.iloc[max(0, i-104):i].copy().dropna(subset=['y']) 
+            if len(train) < min_train_weeks: continue 
+            
             pred_residual, cached_bundle = hybrid_predict_value(train, X_last, xgb_feats, lstm_feats) 
         else:
             for f in xgb_feats: 
@@ -335,4 +338,5 @@ def rolling_backtest(df, oil, xgb_feats, lstm_feats, start_test_date, min_train_
         w_ai_history.append(final_w_ai) 
 
     return np.array(y_true), np.array(y_ai), np.array(y_arima), dates_test, lstm_flags, np.array(w_ai_history)
+
 
