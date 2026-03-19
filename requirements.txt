@@ -11,6 +11,9 @@ matplotlib
 xgboost
 statsmodels
 transformers
+torch
 shap
 tqdm
 tensorflow-cpu
+pandas-ta
+schedule
