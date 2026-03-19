@@ -3,7 +3,7 @@
 ## 📖 專案簡介 (Project Overview)
 本專案旨在透過機器學習與領域知識 (Domain Knowledge)，建構一個能精準預測「台灣中油次週汽柴油公告牌價」的決策支援系統。有別於傳統單一的時序預測，本專案獨創 **「AI 混合模型 + 智慧風控濾網 + 政策模擬引擎」** 三層架構。不僅預測國際原油走勢，更精準模擬台灣政府的調價法規，提供具備真實商業價值的決策建議。
 
-> 🏆 **專案成就：** 於 AI 大數據與 LLM 模型應用人才養成班結訓時，榮獲班級評估 **第二名**！(預測準確率達 61.1%)
+> 🏆 **專案成就：** 於 AI 大數據與 LLM 模型應用人才養成班結訓時，榮獲班級評估 **第二名**！(預測準確率達 61.2%)
 
 ## ✨ 核心技術亮點 (Key Innovations)
 本專案跳脫純學術的數據擬合，解決了金融時間序列高度雜訊的痛點：
@@ -46,5 +46,5 @@
 
 **1. Clone 專案到本地端**
 ```bash
-git clone [https://github.com/您的帳號/專案名稱.git](https://github.com/您的帳號/專案名稱.git)
-cd 專案名稱
+git clone https://github.com/t2wqr27-tech/oil-price-prediction.git
+cd oil-price-prediction
