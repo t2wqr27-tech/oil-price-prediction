@@ -57,7 +57,7 @@ sequenceDiagram
 
 ### 🎯 模型評估指標
 
-* **方向預測準確率 (Direction Accuracy): 61.1%** (突破傳統統計模型瓶頸)
+* **方向預測準確率 (Direction Accuracy): 61.2%** (突破傳統統計模型瓶頸)
   <br><img width="600" alt="CONFUSION_92" src="https://github.com/user-attachments/assets/9c9e09aa-cf9f-45ea-9421-657bc52a0b3b" />
 
 * **系統化誤差 (Bias Drift):** 透過動態權重與殘差修正，長期累積誤差趨近於零。
