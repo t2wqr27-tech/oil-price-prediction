@@ -18,6 +18,7 @@
 本專案整合前端介面、預測 API 與資料庫，完整模擬真實環境下的系統交握流程。
 
 ```mermaid
+
 sequenceDiagram
     actor VIP會員
     participant 前端網頁
