@@ -13,6 +13,25 @@
 * **政策模擬引擎 (Policy Engine)：** 程式內建台灣中油「亞鄰最低價天花板」與「油價平穩機制」雙重法規演算法，將 AI 預測還原為合規的最終零售價。
 * **NLP 情緒分析：** 導入 ProsusAI/FinBERT 模型，即時抓取國際能源新聞進行語意運算，將地緣政治與市場恐慌情緒量化為特徵。
 
+## 📐 系統架構與 API 流程 (System Architecture)
+本專案整合前端介面、預測 API 與資料庫，完整模擬真實環境下的系統交握流程。以下為本系統之循序圖 (Sequence Diagram)：
+
+```mermaid
+sequenceDiagram
+    actor VIP會員
+    participant 前端網頁
+    participant 預測API
+    participant 歷史資料庫
+
+    VIP會員->>前端網頁: 1. 輸入預測日期與參數
+    前端網頁->>預測API: 2. 發送 POST 請求 (RESTful API)
+    預測API->>歷史資料庫: 3. 撈取原油收盤價與總體經濟特徵
+    歷史資料庫-->>預測API: 4. 回傳清洗後特徵資料
+    預測API->>預測API: 5. 執行 ARIMA 趨勢 + XGBoost 殘差混合運算
+    預測API->>預測API: 6. 經過 Policy Engine (法規平穩機制) 轉換
+    預測API-->>前端網頁: 7. 回傳最終預測牌價 (JSON)
+    前端網頁-->>VIP會員: 8. 渲染視覺化預測圖表
+
 ## 🛠️ 技術堆疊 (Tech Stack)
 * **資料工程與爬蟲：** Python, Pandas, Numpy, Requests, yfinance, Feedparser
 * **機器學習與 NLP：** Scikit-learn, XGBoost, Statsmodels (ARIMA), Transformers (Hugging Face / FinBERT)
