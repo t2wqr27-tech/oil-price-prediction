@@ -22,16 +22,16 @@ sequenceDiagram
     actor VIP會員
     participant 前端網頁
     participant 預測API
-    participant 歷史資料庫
+    participant 數據源(CSV/API)
 
     VIP會員->>前端網頁: 1. 輸入預測日期與參數
-    前端網頁->>預測API: 2. 發送 POST 請求 (RESTful API)
-    預測API->>歷史資料庫: 3. 撈取原油收盤價與總體經濟特徵
-    歷史資料庫-->>預測API: 4. 回傳歷史特徵資料
+    前端網頁->>預測API: 2. 發送 POST 請求
+    預測API->>數據源(CSV/API): 3. 讀取歷史特徵數據
+    數據源(CSV/API)-->>預測API: 4. 回傳清洗後特徵
     預測API->>預測API: 5. 執行 ARIMA+XGBoost 混合運算
-    預測API->>預測API: 6. 經過 Policy Engine (法規平穩機制) 轉換
+    預測API->>預測API: 6. 經過 Policy Engine 法規換算
     預測API-->>前端網頁: 7. 回傳最終預測牌價 (JSON)
-    前端網頁-->>VIP會員: 8. 渲染視覺化預測圖表
+    前端網頁-->>VIP會員: 8. 渲染視覺化圖表
 ```
 
 ## 🛠️ 技術堆疊 (Tech Stack)
