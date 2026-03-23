@@ -31,7 +31,8 @@ sequenceDiagram
     預測API->>預測API: 5. 執行 ARIMA+XGBoost 混合運算
     預測API->>預測API: 6. 經過 Policy Engine (法規平穩機制) 轉換
     預測API-->>前端網頁: 7. 回傳最終預測牌價 (JSON)
-    前端網頁-->>VIP會員: 8. 渲染視覺化預測圖表```
+    前端網頁-->>VIP會員: 8. 渲染視覺化預測圖表
+```
 
 ## 🛠️ 技術堆疊 (Tech Stack)
 * **資料工程與爬蟲：** Python, Pandas, Numpy, Requests, yfinance, Feedparser
