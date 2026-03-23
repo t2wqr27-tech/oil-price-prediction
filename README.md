@@ -33,38 +33,39 @@ sequenceDiagram
     預測API-->>前端網頁: 7. 回傳最終預測牌價 (JSON)
     前端網頁-->>VIP會員: 8. 渲染視覺化預測圖表
 
-    ## 🛠️ 技術堆疊 (Tech Stack)
-    * **資料工程與爬蟲：** Python, Pandas, Numpy, Requests, yfinance, Feedparser
-    * **機器學習與 NLP：** Scikit-learn, XGBoost, Statsmodels (ARIMA), Transformers (Hugging Face / FinBERT)
-    * **視覺化與解釋性：** Matplotlib, Seaborn, SHAP (特徵貢獻度分析)
-    * **自動化部署：** LINE Messaging API (自動廣播推播系統), Schedule 排程自動化
-    
-    ## 📊 資料來源與特徵工程 (Data & Feature Engineering)
-    * **國際金融數據：** 布蘭特原油 (Brent)、USD/TWD、JPY、KRW 匯率、VIX 恐慌指數。
-    * **技術指標擴充：** MA 乖離率、MACD 動能、RSI、ATR、布林通道帶寬、量價相對指標。
-    * **防呆與極端值處理：** 動態歷史波動門檻計算、極端事件偵測與標記 (如 COVID-19、烏俄戰爭)。
-    
-    ## 📈 成果展示 (Results & Visualizations)
-    
-    <img width="864" height="432" alt="92_timeseries" src="https://github.com/user-attachments/assets/2eb00d52-dc9c-4aea-b175-48170e321a0b" />
-    *▲ 圖 1：ARIMA+XGBoost 混合預測與實際油價變動之擬合狀況 (含 95% 信賴區間)*
-    
-    <br>
-    
-    <img width="3447" height="1699" alt="ASIA_CEILING_92" src="https://github.com/user-attachments/assets/6102a583-a7a6-4e20-a6f0-b429a93beed4" />
-    *▲ 圖 2：政策引擎精準捕捉「亞鄰競爭國最低價」對漲幅的壓抑效應 (橘色區域)*
-    
-    ### 🎯 模型評估指標
-    
-    * **方向預測準確率 (Direction Accuracy): 61.1%** (突破傳統統計模型瓶頸)
-      <br><img width="600" alt="CONFUSION_92" src="https://github.com/user-attachments/assets/9c9e09aa-cf9f-45ea-9421-657bc52a0b3b" />
-    
-    * **系統化誤差 (Bias Drift):** 透過動態權重與殘差修正，長期累積誤差趨近於零。
-      <br><img width="800" alt="CUM_ERROR_92" src="https://github.com/user-attachments/assets/281ed13a-8c0d-447a-87b0-9be1de56491d" />
-    
-    ## 🚀 如何執行此專案 (Quick Start)
-    
-    **1. Clone 專案到本地端**
-    ```bash
-    git clone https://github.com/t2wqr27-tech/oil-price-prediction.git
-    cd oil-price-prediction
+
+## 🛠️ 技術堆疊 (Tech Stack)
+* **資料工程與爬蟲：** Python, Pandas, Numpy, Requests, yfinance, Feedparser
+* **機器學習與 NLP：** Scikit-learn, XGBoost, Statsmodels (ARIMA), Transformers (Hugging Face / FinBERT)
+* **視覺化與解釋性：** Matplotlib, Seaborn, SHAP (特徵貢獻度分析)
+* **自動化部署：** LINE Messaging API (自動廣播推播系統), Schedule 排程自動化
+
+## 📊 資料來源與特徵工程 (Data & Feature Engineering)
+* **國際金融數據：** 布蘭特原油 (Brent)、USD/TWD、JPY、KRW 匯率、VIX 恐慌指數。
+* **技術指標擴充：** MA 乖離率、MACD 動能、RSI、ATR、布林通道帶寬、量價相對指標。
+* **防呆與極端值處理：** 動態歷史波動門檻計算、極端事件偵測與標記 (如 COVID-19、烏俄戰爭)。
+
+## 📈 成果展示 (Results & Visualizations)
+
+<img width="864" height="432" alt="92_timeseries" src="https://github.com/user-attachments/assets/2eb00d52-dc9c-4aea-b175-48170e321a0b" />
+*▲ 圖 1：ARIMA+XGBoost 混合預測與實際油價變動之擬合狀況 (含 95% 信賴區間)*
+
+<br>
+
+<img width="3447" height="1699" alt="ASIA_CEILING_92" src="https://github.com/user-attachments/assets/6102a583-a7a6-4e20-a6f0-b429a93beed4" />
+*▲ 圖 2：政策引擎精準捕捉「亞鄰競爭國最低價」對漲幅的壓抑效應 (橘色區域)*
+
+### 🎯 模型評估指標
+
+* **方向預測準確率 (Direction Accuracy): 61.1%** (突破傳統統計模型瓶頸)
+  <br><img width="600" alt="CONFUSION_92" src="https://github.com/user-attachments/assets/9c9e09aa-cf9f-45ea-9421-657bc52a0b3b" />
+
+* **系統化誤差 (Bias Drift):** 透過動態權重與殘差修正，長期累積誤差趨近於零。
+  <br><img width="800" alt="CUM_ERROR_92" src="https://github.com/user-attachments/assets/281ed13a-8c0d-447a-87b0-9be1de56491d" />
+
+## 🚀 如何執行此專案 (Quick Start)
+
+**1. Clone 專案到本地端**
+```bash
+git clone https://github.com/t2wqr27-tech/oil-price-prediction.git
+cd oil-price-prediction
