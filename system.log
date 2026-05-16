@@ -9688,3 +9688,516 @@ Trying to import the above resulted in these errors:
 2026-05-09 11:58:15,124 - INFO - 🚛 [柴油]: 調降 0.5 元 | 價格: 30.5
 2026-05-09 11:58:15,138 - INFO - 
 ✅ 所有分析完成！結果已儲存於：週五精準預測成果
+2026-05-16 12:04:06,178 - INFO - ✅ 運行模式：即時預測
+2026-05-16 12:04:06,781 - ERROR - Failed to get ticker '1671.T' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:07,015 - ERROR - $1671.T: possibly delisted; no price data found  (period=5d)
+2026-05-16 12:04:07,249 - ERROR - Failed to get ticker '096770.KS' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:07,484 - ERROR - $096770.KS: possibly delisted; no price data found  (period=5d)
+2026-05-16 12:04:07,501 - INFO - 📦 嘗試批量下載 Yahoo Finance 首選資料 (已掛載偽裝 Session)...
+2026-05-16 12:04:07,864 - ERROR - Failed to get ticker 'CL=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:07,867 - ERROR - Failed to get ticker 'JPY=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:07,871 - ERROR - Failed to get ticker 'USDTWD=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:07,872 - ERROR - Failed to get ticker '^VIX' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:08,127 - ERROR - Failed to get ticker 'BZ=F' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:08,130 - ERROR - Failed to get ticker 'KRW=X' reason: Expecting value: line 1 column 1 (char 0)
+2026-05-16 12:04:08,135 - ERROR - 
+6 Failed downloads:
+2026-05-16 12:04:08,135 - ERROR - ['CL=F', 'JPY=X', 'USDTWD=X', '^VIX', 'BZ=F', 'KRW=X']: YFTzMissingError('$%ticker%: possibly delisted; no timezone found')
+2026-05-16 12:04:08,139 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 布蘭特原油 (DCOILBRENTEU)...
+2026-05-16 12:04:08,443 - INFO -    ✅ FRED API 救援大成功: 布蘭特原油
+2026-05-16 12:04:08,444 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: WTI原油 (DCOILWTICO)...
+2026-05-16 12:04:08,528 - INFO -    ✅ FRED API 救援大成功: WTI原油
+2026-05-16 12:04:08,528 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 台幣匯率 (DEXTAUS)...
+2026-05-16 12:04:08,613 - INFO -    ✅ FRED API 救援大成功: 台幣匯率
+2026-05-16 12:04:08,614 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 日圓匯率 (DEXJPUS)...
+2026-05-16 12:04:08,718 - INFO -    ✅ FRED API 救援大成功: 日圓匯率
+2026-05-16 12:04:08,719 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 韓元匯率 (DEXKOUS)...
+2026-05-16 12:04:08,836 - INFO -    ✅ FRED API 救援大成功: 韓元匯率
+2026-05-16 12:04:08,837 - WARNING -    ⚠️ 啟動美國聯準會(FRED)官方 API 救援: 恐慌指數 (VIXCLS)...
+2026-05-16 12:04:08,927 - INFO -    ✅ FRED API 救援大成功: 恐慌指數
+2026-05-16 12:04:15,642 - INFO - ⛽ 分析油品：92 ...
+2026-05-16 12:04:16,060 - INFO - 📊 92 AI 原始預測變動: +0.11
+2026-05-16 12:04:16,060 - INFO -    🔍 生成 SHAP 解釋性分析報告...
+2026-05-16 12:04:16,306 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,308 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,308 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,312 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,312 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,314 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,315 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,315 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,316 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,316 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,317 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,317 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,318 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,318 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,319 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,319 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,320 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,320 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,321 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,322 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,322 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,323 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,323 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,323 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,324 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,331 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,331 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,333 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,334 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,349 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,349 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,361 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,361 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,362 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,363 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,363 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,364 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,364 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,365 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,365 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,366 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,366 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,366 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,367 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,368 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,368 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,369 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,369 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,370 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,370 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,370 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,371 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,374 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,374 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,376 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,377 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,377 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,377 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,378 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,378 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,382 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,430 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,431 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,432 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,433 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,459 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,459 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,460 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,460 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,461 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,461 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,462 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,462 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,463 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,463 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,464 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,464 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,465 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,466 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,466 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,467 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,467 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,467 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,468 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,468 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,469 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,472 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,472 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,479 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,479 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,480 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,480 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,480 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,481 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,482 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,483 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,484 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,485 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,486 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,488 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,489 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,492 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,493 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,494 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,495 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,496 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,497 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,498 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,499 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,500 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,501 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,501 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,502 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,503 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,504 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,505 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,506 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,507 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,508 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,509 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,509 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,567 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,570 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,570 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,571 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,571 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,572 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,572 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,573 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,828 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,828 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,829 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,830 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,830 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,831 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,831 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,832 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,832 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,833 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,833 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,834 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,834 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,835 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,835 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,836 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,836 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,837 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,837 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,838 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,838 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,841 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,841 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,845 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,846 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,846 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,846 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,847 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,847 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,848 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,849 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,850 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,850 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,851 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,853 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,854 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,857 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,858 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,859 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,860 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,861 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,862 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,863 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,863 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,864 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,865 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,866 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,867 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,868 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,868 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,869 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,870 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,871 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,872 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,872 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,873 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,927 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,929 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,930 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,930 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,931 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,932 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,932 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,933 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:16,936 - INFO - 🛶 [低波動] 0.00 < 0.07440057087959563 -> 回歸 ARIMA
+2026-05-16 12:04:16,936 - INFO -    ↳ 最終預測 (Regime Switching (Low Vol)): 0.07
+2026-05-16 12:04:16,936 - INFO -    💴 [壓力測試] 若日幣升值1%，天花板價將變為: 32.50
+2026-05-16 12:04:21,000 - INFO - 
+🌪️ 正在對 92 進行敏感度壓力測試...
+2026-05-16 12:04:21,033 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,034 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,034 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,035 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,035 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,036 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,036 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,036 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,037 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,037 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,039 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,039 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,040 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,040 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,051 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,052 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,053 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,054 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,054 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,055 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,056 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,057 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,057 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,060 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,061 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,063 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,064 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,065 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,066 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,066 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,067 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,068 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,068 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,069 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,072 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,073 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,099 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,100 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,101 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,101 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,102 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,103 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,104 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,104 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,105 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,108 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,110 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,111 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,112 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,112 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,113 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,114 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,115 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,115 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,116 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,119 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,120 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,139 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,139 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,140 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,140 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,141 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,141 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,141 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,142 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,142 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,144 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,144 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,145 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,146 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,156 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,156 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,157 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,157 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,158 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,158 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,159 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,159 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,160 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,161 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,162 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,163 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,163 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,164 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,165 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,166 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,170 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,171 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,173 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,174 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,174 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,175 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,176 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,177 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,177 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,178 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,181 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,182 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,184 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,184 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,185 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,186 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,190 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,191 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,192 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,193 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,234 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,235 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,236 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,236 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,237 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,238 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,239 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,240 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,244 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,247 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,247 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,248 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,249 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,250 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,250 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,251 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,252 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,254 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,256 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,260 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,263 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,264 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,265 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,298 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,298 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,298 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,299 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,299 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,300 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,300 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,300 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,301 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,301 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,303 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,303 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,308 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,309 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,310 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,310 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,311 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,311 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,312 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,312 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,313 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,313 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,314 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,316 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,316 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,317 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,318 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,319 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,320 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,321 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,322 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,323 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,327 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,328 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,329 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,329 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,330 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,331 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,332 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,332 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,333 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,336 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,338 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,338 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,339 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,344 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,345 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,346 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,386 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,387 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,388 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,389 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,390 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,391 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,392 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,393 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,394 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,395 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,396 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,400 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,401 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,401 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,402 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,403 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,404 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,404 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,405 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,406 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,409 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,414 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,415 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,417 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,434 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,434 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,434 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,435 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,435 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,435 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,436 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,436 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,438 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,438 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,439 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,439 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,446 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,447 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,447 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,448 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,448 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,448 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,449 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,449 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,450 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,451 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,452 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,453 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,454 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,454 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,455 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,456 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,462 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,463 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,464 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,465 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,465 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,466 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,467 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,469 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,471 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,472 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,475 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,502 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,503 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,504 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,505 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,505 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,506 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,507 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,508 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,514 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,515 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,516 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,516 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,517 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,518 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,519 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,521 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,522 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,526 - WARNING - findfont: Generic family 'sans-serif' not found because none of the following families were found: Microsoft JhengHei, SimHei, Arial
+2026-05-16 12:04:21,527 - INFO - ⛽ 分析油品：95 ...
+2026-05-16 12:04:21,943 - INFO - 📊 95 AI 原始預測變動: +0.11
+2026-05-16 12:04:21,945 - INFO - 🛶 [低波動] 0.00 < 0.07440057087959563 -> 回歸 ARIMA
+2026-05-16 12:04:21,945 - INFO -    ↳ 最終預測 (Regime Switching (Low Vol)): 0.07
+2026-05-16 12:04:21,946 - INFO -    💴 [壓力測試] 若日幣升值1%，天花板價將變為: 34.00
+2026-05-16 12:04:25,974 - INFO - ⛽ 分析油品：98 ...
+2026-05-16 12:04:26,395 - INFO - 📊 98 AI 原始預測變動: +0.11
+2026-05-16 12:04:26,397 - INFO - 🛶 [低波動] 0.00 < 0.07440057087959558 -> 回歸 ARIMA
+2026-05-16 12:04:26,397 - INFO -    ↳ 最終預測 (Regime Switching (Low Vol)): 0.07
+2026-05-16 12:04:26,398 - INFO -    💴 [壓力測試] 若日幣升值1%，天花板價將變為: 36.00
+2026-05-16 12:04:30,450 - INFO - ⛽ 分析油品：柴油 ...
+2026-05-16 12:04:30,871 - INFO - 📊 柴油 AI 原始預測變動: +0.15
+2026-05-16 12:04:30,873 - INFO - 🛶 [低波動] 0.00 < 0.10319189463884877 -> 回歸 ARIMA
+2026-05-16 12:04:30,873 - INFO -    ↳ 最終預測 (Regime Switching (Low Vol)): 0.10
+2026-05-16 12:04:30,873 - INFO -    💴 [壓力測試] 若日幣升值1%，天花板價將變為: 31.10
+2026-05-16 12:04:34,854 - INFO - 
+==================================================
+📌【本週油價預測最終總結】
+2026-05-16 12:04:34,855 - INFO - ⛽ [汽油]: 調漲 0.1 元 | 92: 32.5, 95: 34.0, 98: 36.0
+2026-05-16 12:04:34,855 - INFO - 🚛 [柴油]: 調漲 0.1 元 | 價格: 31.1
+2026-05-16 12:04:34,868 - INFO - 
+✅ 所有分析完成！結果已儲存於：週五精準預測成果
